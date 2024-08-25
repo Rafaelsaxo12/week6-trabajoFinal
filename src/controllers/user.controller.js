@@ -21,12 +21,13 @@ const remove = catchError(async(req, res) => {
 });
 
 const update = catchError(async(req, res) => {
-    const { id } = req.params;
     //aca debemos impedir que se actualicen el email. el password y el phone
-    delete req.body.email
-    delete req.body.password
-    delete req.body.phone
-
+    const deleteFields = ['password', 'email', 'phone']
+    deleteFields.forEach((field) => {
+        delete req.body[field]
+    })
+    const { id } = req.params;
+    
     const result = await User.update(
         req.body,
         { where: {id}, returning: true }
