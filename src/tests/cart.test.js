@@ -35,7 +35,7 @@ beforeAll(async() => {
     });
     // console.log(category)
     product = await Product.create({
-        title: "Stellar Blase",
+        title: "GOD OF WAR",
         description: "A new adventure story for PlayStation 5",
         price: 1600,
         categoryId: category.id,
