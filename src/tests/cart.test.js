@@ -18,17 +18,18 @@ const BASE_URL = '/api/v1/cart';
 
 beforeAll(async() => {
     user = {
-        email: "test@email.com",
-        password: "user1234",
+        email: "rafa@gmail.com",
+        password: "rafa1234"
     };
     const res = await request(app)
-        .post(BASE_URL_LOGIN)
-        .send(user);
+    .post(BASE_URL_LOGIN)
+    .send(user);
 
-        userId = res.body.user.id;
-        // console.log(res.body.user.id)
-        TOKEN = res.body.token;
-        // console.log(TOKEN)
+    userId = res.body.user.id;
+
+    console.log(userId);
+    
+    TOKEN = res.body.token;
 
     category = await Category.create({
         name: "Videogames",

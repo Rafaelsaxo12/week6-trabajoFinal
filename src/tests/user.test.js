@@ -89,15 +89,18 @@ test("GET -> BASE_URL/login, should return statusCode 200, and res.body.email ==
 
     //  POST (Login error)
     test("POST --> BASE_URL/LOGIN, should return statusCode 401", async () => {
+
         const userLogin = {
-            email: user.email,
+            email: "rafael12@gmail.com",
             password: "invalid credentials"
         };
+
         const res = await request(app)
             .post(`${BASE_URL}/login`)
             .send(userLogin);
+
         expect(res.status).toBe(401);
-    }, 20000); 
+    }); 
     
 
 test("PUT --> BASE_URL/userId, should return statusCode 200, and res.body.user.firstName === userUpdate.firstName", async() => {
@@ -111,7 +114,7 @@ test("PUT --> BASE_URL/userId, should return statusCode 200, and res.body.user.f
         .send(userUpdate)
         .set('Authorization', `Bearer ${TOKEN}`)
     
-        console.log(userId);
+        
         
 
         expect(res.status).toBe(200)
