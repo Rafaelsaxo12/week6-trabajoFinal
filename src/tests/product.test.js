@@ -14,9 +14,9 @@ const BASE_URL = '/api/v1/products';
 
 beforeAll(async() => {
     const user = {
-        email: "test@email.com",
-        password: "user1234",
-    };
+        email: "rafa@gmail.com",
+        password: "rafa1234"
+    }
     const res = await request(app)
         .post(BASE_URL_LOGIN)
         .send(user)
@@ -28,8 +28,8 @@ beforeAll(async() => {
         })
 
         product = {
-            title: "Stellar Blade",
-            description: "The future of humanity is at stake in Stellar Blade, a new action-adventure story for PlayStation®5. Earth has been abandoned, ravaged by powerful and strange creatures, and the remnants of the decimated human race have escaped to a colony in outer space. From the Colony, EVE, a member of the VII Air Squadron, arrives on our desolate planet with a mission: save humanity and take back Earth from the clutches of the Naytibas, the malevolent force that has laid waste to everything. However, as EVE solves the mysteries of the past in the ruins of human civilization and defeats the Naytibas one by one, she realizes that her mission is not as simple as she thought. In fact, nothing will be as easy as it seems…",
+            title: "God of War",
+            description: "The god of war return to a new adventure in ps5",
             price: 1600,
             categoryId: category.id
         }
