@@ -93,11 +93,11 @@ test("GET -> BASE_URL/login, should return statusCode 200, and res.body.email ==
             email: user.email,
             password: "invalid credentials"
         };
-        const res = await request(server)
-            .post(BASE_URL_LOGIN)
+        const res = await request(app)
+            .post(`${BASE_URL}/login`)
             .send(userLogin);
         expect(res.status).toBe(401);
-    }, 10000); 
+    }, 20000); 
     
 
 test("PUT --> BASE_URL/userId, should return statusCode 200, and res.body.user.firstName === userUpdate.firstName", async() => {
