@@ -13,9 +13,9 @@ const category = {
 
 beforeAll(async() => {
     const user = {
-        email: "test@email.com",
-        password: "user1234",
-    };
+        email: "rafa@gmail.com",
+        password: "rafa1234"
+    }
     const res = await request(app)
         .post(BASE_URL_LOGIN)
         .send(user)

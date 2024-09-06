@@ -27,7 +27,7 @@ beforeAll(async() => {
 
     userId = res.body.user.id;
 
-    console.log(userId);
+    
     
     TOKEN = res.body.token;
 
