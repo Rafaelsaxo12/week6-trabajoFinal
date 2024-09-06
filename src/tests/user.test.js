@@ -28,19 +28,32 @@ const user = {
     phone: "+584142385574"
 }
 
-test("POST -> BASE_URL, should return statusCode 201, and res.body.firstName === user.firstName", async () => {
+// POST (Create)
+test("POST --> BASE_URL, should return statusCode 201, and res.body.firstName === user.firstName", async() => {
 
+    const columns = ["firstName", "lastName", "email", "phone"];
+    
     const res = await request(app)
-        .post(BASE_URL)
-        .send(user)
-
-        userId = res.body.id
-
-        expect(res.statusCode).toBe(201)
-        expect(res.body).toBeDefined()
-        expect(res.body.firstName).toBeDefined()
-        expect(res.body.firstName).toBe(user.firstName)
+        .post(`${BASE_URL}`)
+        .send(user)    
+    
+        userId = res.body.id;
+            // console.log(userId)
+            // console.log(res.body)
+    
+        expect(res.statusCode).toBe(201);
+        expect(res.body).toBeDefined();
+    
+        columns.forEach((column) => {
+            expect(res.body[column]).toBeDefined();
+            expect(res.body[column]).toBe(user[column]);
+        })
+    
+            // For the hashedPassword, only verify if been defined.
+        expect(res.body.password).toBeDefined()
+    
 })
+    
 
 test("GET -> BASE_URL, should return statusCode 200, and res.body.length == 2", async () => {
     const res = await supertest(app)
@@ -63,7 +76,37 @@ test("GET -> BASE_URL/login, should return statusCode 200, and res.body.email ==
     const res = await request(app)
         .post(`${BASE_URL}/login`)
         .send(user)
+
+
+        expect(res.status).toBe(200)
+        expect(res.body).toBeDefined()
+        expect(res.body.user).toBeDefined()
+        expect(res.body.token).toBeDefined()
+        expect(res.body.user.email).toBeDefined()
+        expect(res.body.user.email).toBe(userLogin.email)
+        expect(res.body.user.password).toBeDefined()
 })
+
+    //  POST (Login error)
+    test("POST --> BASE_URL/LOGIN, should return statusCode 401", async() => {
+        const userLogin = {
+            email: user.email,
+            password:"invalid credentials"
+        }
+    
+        // console.log(userLogin)
+        
+        const res = await request(app)
+            .post(`${BASE_URL}/login`)
+            .send(userLogin)
+        
+            // console.log(res.body)
+            // TOKEN2 = res.body.token;
+            // console.log({TOKEN, TOKEN2})
+    
+            expect(res.status).toBe(401)
+                
+    })
 
 test("PUT --> BASE_URL/userId, should return statusCode 200, and res.body.user.firstName === userUpdate.firstName", async() => {
     const userUpdate = {
